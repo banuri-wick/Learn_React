@@ -1,0 +1,14 @@
+.custom-card {
+  width: 50%;
+  top: 50px !important;
+  left: 450px !important;
+  z-index: 1000;
+}
+
+.title {
+  color: white;
+  font-weight: 700;
+  margin-left: 450px !important;
+  width: fit-content;
+  margin-top: 74px;
+}

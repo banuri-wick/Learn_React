@@ -1,0 +1,10 @@
+.icon-add-new {
+  cursor: pointer;
+  margin-top: 13px !important;
+  margin-left: 85% !important;
+}
+
+.icon-edit,
+.icon-delete {
+  cursor: pointer !important;
+}
