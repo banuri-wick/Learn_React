@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 export const DeleteBook = (props) => {
+  //#region States
+  const [isDeleted, setDeleteState] = useState(false);
+  //#endregion
+
   //#region Functions
   const deleteHandler = () => {
-    console.log("DELETED!");
-    props.modalHandler(false);
+    sendAPICall();
+    props.modalHandler(false, isDeleted);
   };
 
   const closeModal = () => {
-    props.modalHandler(false);
+    props.modalHandler(false, isDeleted);
+  };
+
+  const sendAPICall = () => {
+    const request = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    fetch(
+      `https://localhost:7063/api/deleteBook?id=${props.deleteBookId}`,
+      request
+    )
+      .then((response) => {
+        if (response.status === "200") {
+          setDeleteState(true);
+        } else {
+          setDeleteState(false);
+        }
+      })
+      .catch((err) => console.error(err));
   };
   //#endregion
 

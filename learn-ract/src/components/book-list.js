@@ -19,8 +19,9 @@ export const BookList = () => {
   //#region States
   const [bookList, setData] = useState([]);
   const [isAddedNewBook, setBook] = useState(false);
+  const [isDeletedBook, setBookDeleteState] = useState(false);
   const [bookState, setBookState] = useState(null);
-  const [deleteBookState, setBookStateToDelete] = useState(null);
+  const [deleteBookId, setBookIdToDelete] = useState(null);
   const [isVisibleManageBook, setVisibilityForManageBookModal] =
     useState(false);
   const [isVisibleDeleteBook, setVisibilityForDeleteBookModal] =
@@ -63,14 +64,13 @@ export const BookList = () => {
   //#endregion
 
   //#region Delete book
-  const openDeleteBookModal = (isVisible) => {
-    setVisibilityForDeleteBookModal(isVisible);
+  const openDeleteBookModal = (isModalOpen, isDeleted) => {
+    setBookDeleteState(isDeleted);
+    setVisibilityForDeleteBookModal(isModalOpen);
   };
 
   const deleteBookHander = (x) => {
-    setBookStateToDelete({
-      deleteBookId: x,
-    });
+    setBookIdToDelete(x);
     openDeleteBookModal(true);
   };
   //#endregion
@@ -85,7 +85,7 @@ export const BookList = () => {
   //#region React Hooks
   useEffect(() => {
     getAllBooks();
-  }, [isAddedNewBook]);
+  }, [isAddedNewBook, isDeletedBook]);
   //#endregion
 
   return (
@@ -102,7 +102,6 @@ export const BookList = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Book name</th>
                 <th>Author</th>
                 <th>Unit price</th>
@@ -113,7 +112,6 @@ export const BookList = () => {
               {bookList.map((x) => {
                 return (
                   <tr key={x.id}>
-                    <td>{x.id}</td>
                     <td>{x.name}</td>
                     <td>{x.author}</td>
                     <td>{x.price}</td>
@@ -155,8 +153,10 @@ export const BookList = () => {
         {isVisibleDeleteBook && (
           <DeleteBook
             isVisibleDeleteBook={isVisibleDeleteBook}
-            deleteBookState={deleteBookState}
-            modalHandler={openDeleteBookModal}
+            deleteBookId={deleteBookId}
+            modalHandler={(isModalOpen, isDeleted) =>
+              openDeleteBookModal(isModalOpen, isDeleted)
+            }
           />
         )}
       </Card>

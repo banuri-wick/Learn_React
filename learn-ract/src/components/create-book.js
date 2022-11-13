@@ -42,7 +42,6 @@ export const CreateBook = (props) => {
   };
 
   const sendAPICall = () => {
-    console.log("form-data>>> ", formData.id);
     let apiMethod = formData.id !== null ? "PUT" : "POST";
     let url =
       formData.id !== null
