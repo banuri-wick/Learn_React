@@ -42,15 +42,22 @@ export const CreateBook = (props) => {
   };
 
   const sendAPICall = () => {
+    console.log("form-data>>> ", formData.id);
+    let apiMethod = formData.id !== null ? "PUT" : "POST";
+    let url =
+      formData.id !== null
+        ? "https://localhost:7063/api/updateBook"
+        : "https://localhost:7063/api/createBook";
+
     const requestOptions = {
-      method: "POST",
+      method: apiMethod,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(formData),
     };
-    fetch("https://localhost:7063/api/createBook", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .catch((err) => console.error(err));
   };
