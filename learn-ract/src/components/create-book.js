@@ -10,7 +10,6 @@ export const CreateBook = (props) => {
     name: "",
     author: "",
     price: 0,
-    stocksAvailable: 0,
   };
   let latestFormData =
     props.bookState !== null && props.bookState.isUpdate
@@ -41,18 +40,21 @@ export const CreateBook = (props) => {
       name: "",
       author: "",
       price: 0,
-      stocksAvailable: 0,
     });
     props.modalHandler(false);
+    props.manageHandler();
   };
 
   const sendAPICall = () => {
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify(formData),
     };
-    fetch("https://localhost:7063/create", requestOptions)
+    fetch("https://localhost:7063/api/createBook", requestOptions)
       .then((response) => response.json())
       .catch((err) => console.error(err));
   };
@@ -108,23 +110,6 @@ export const CreateBook = (props) => {
                     <option value="Author 2">Author 2</option>
                     <option value="Author 3">Author 3</option>
                   </Form.Select>
-                </Col>
-              </Row>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formAvailability">
-              <Row>
-                <Col>
-                  <Form.Label>Availability of stocks</Form.Label>
-                </Col>
-                <Col>
-                  <Form.Control
-                    name="stocksAvailable"
-                    type="text"
-                    placeholder="Enter No available stocks"
-                    value={formData.stocksAvailable}
-                    onChange={onControlChange}
-                  />
                 </Col>
               </Row>
             </Form.Group>

@@ -16,6 +16,7 @@ import { CreateBook } from "./create-book";
 import { DeleteBook } from "./delete-book";
 
 export const BookList = () => {
+  console.log("2222222222222222222222");
   //#region States
   const [bookList, setData] = useState([]);
   const [bookState, setBookState] = useState(null);
@@ -38,7 +39,6 @@ export const BookList = () => {
           name: "",
           author: "",
           price: 0,
-          stocksAvailable: 0,
         },
       });
     }
@@ -51,7 +51,6 @@ export const BookList = () => {
         name: x.name,
         author: x.author,
         price: x.price,
-        stocksAvailable: x.stocksAvailable,
       },
     });
     openBookModal(true);
@@ -70,13 +69,17 @@ export const BookList = () => {
     openDeleteBookModal(true);
   };
   //#endregion
+
+  const getAllBooks = () => {
+    fetch("https://localhost:7063/api/getAllBooks")
+      .then((res) => res.json())
+      .then((bookList) => setData(bookList));
+  };
   //#endregion
 
   //#region React Hooks
   useEffect(() => {
-    fetch("https://localhost:7063/GetAllBooks")
-      .then((res) => res.json())
-      .then((bookList) => setData(bookList));
+    getAllBooks();
   }, []);
   //#endregion
 
@@ -97,7 +100,6 @@ export const BookList = () => {
                 <th>#</th>
                 <th>Book name</th>
                 <th>Author</th>
-                <th>Availability</th>
                 <th>Unit price</th>
                 <th>Action</th>
               </tr>
@@ -109,7 +111,6 @@ export const BookList = () => {
                     <td>{x.id}</td>
                     <td>{x.name}</td>
                     <td>{x.author}</td>
-                    <td>{x.stocksAvailable}</td>
                     <td>{x.price}</td>
                     <td>
                       <Row>
@@ -143,6 +144,7 @@ export const BookList = () => {
             isVisibleManageBook={isVisibleManageBook}
             bookState={bookState}
             modalHandler={openBookModal}
+            manageHandler={getAllBooks}
           />
         )}
 
