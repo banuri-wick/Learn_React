@@ -16,9 +16,9 @@ import { CreateBook } from "./create-book";
 import { DeleteBook } from "./delete-book";
 
 export const BookList = () => {
-  console.log("2222222222222222222222");
   //#region States
   const [bookList, setData] = useState([]);
+  const [isAddedNewBook, setBook] = useState(false);
   const [bookState, setBookState] = useState(null);
   const [deleteBookState, setBookStateToDelete] = useState(null);
   const [isVisibleManageBook, setVisibilityForManageBookModal] =
@@ -36,11 +36,15 @@ export const BookList = () => {
       setBookState({
         isUpdate: false,
         state: {
+          id: null,
           name: "",
           author: "",
           price: 0,
         },
       });
+      setBook(false);
+    } else {
+      setBook(true);
     }
   };
 
@@ -48,6 +52,7 @@ export const BookList = () => {
     setBookState({
       isUpdate: isUpdate,
       state: {
+        id: x.id,
         name: x.name,
         author: x.author,
         price: x.price,
@@ -80,7 +85,7 @@ export const BookList = () => {
   //#region React Hooks
   useEffect(() => {
     getAllBooks();
-  }, []);
+  }, [isAddedNewBook]);
   //#endregion
 
   return (
@@ -144,7 +149,6 @@ export const BookList = () => {
             isVisibleManageBook={isVisibleManageBook}
             bookState={bookState}
             modalHandler={openBookModal}
-            manageHandler={getAllBooks}
           />
         )}
 

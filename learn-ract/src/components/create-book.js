@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 export const CreateBook = (props) => {
   //#region Variables
   const initalFormData = {
+    id: null,
     name: "",
     author: "",
     price: 0,
@@ -36,13 +37,8 @@ export const CreateBook = (props) => {
 
   const createHandler = () => {
     sendAPICall();
-    setFormData({
-      name: "",
-      author: "",
-      price: 0,
-    });
+    setFormData(initalFormData);
     props.modalHandler(false);
-    props.manageHandler();
   };
 
   const sendAPICall = () => {
@@ -62,7 +58,7 @@ export const CreateBook = (props) => {
 
   //#region React hooks
   useEffect(() => {
-    if (props.bookState !== null) {
+    if (props.bookState !== null && props.bookState.isUpdate) {
       setFormData(latestFormData);
     }
   }, [props, latestFormData]);
