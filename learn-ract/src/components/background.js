@@ -1,5 +1,4 @@
 import "../styles/background.css";
-import { BookList } from "./book-list";
 
 export const Background = () => {
   return (
@@ -9,8 +8,6 @@ export const Background = () => {
       <div className="circle large shade3"></div>
       <div className="circle mediun shade4"></div>
       <div className="circle small shade5"></div>
-
-      <BookList />
     </div>
   );
 };

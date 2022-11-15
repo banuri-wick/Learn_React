@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlus,
@@ -83,6 +84,8 @@ export const BookList = () => {
   //#endregion
 
   //#region React Hooks
+  let location = useLocation();
+
   useEffect(() => {
     getAllBooks();
   }, [isAddedNewBook, isDeletedBook]);
@@ -90,7 +93,7 @@ export const BookList = () => {
 
   return (
     <div>
-      <h1 className="title">Book Management System</h1>
+      <h1 className="user"> Hi {location.state.credentials.username}!</h1>
       <Card className="custom-card">
         <FontAwesomeIcon
           icon={faCirclePlus}

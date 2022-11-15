@@ -1,0 +1,23 @@
+.custom-row {
+  padding: 10px;
+}
+
+.custom-label {
+  color: gray;
+}
+
+.login-button-row {
+  margin-left: 28px !important;
+  max-width: 95%;
+  margin: 10px;
+}
+
+.login-button {
+  background-color: darkgray !important;
+  border-color: darkgray !important;
+}
+
+.login-button:hover {
+  background-color: dimgray !important;
+  border-color: dimgray !important;
+}

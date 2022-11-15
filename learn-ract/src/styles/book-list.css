@@ -12,3 +12,11 @@
   width: fit-content;
   margin-top: 74px;
 }
+
+.user {
+  margin-left: -25% !important;
+  margin-top: 4%;
+  margin-bottom: -3%;
+  font-size: 20px;
+  color: #caacd6;
+}
